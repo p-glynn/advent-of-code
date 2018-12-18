@@ -1008,7 +1008,6 @@ const sum = (arr, total=0) => {
         seenFrequencies.push(total)
         total += parseInt(i)
         if (seenFrequencies.includes(total)) {
-            console.log('here')
             foundValue = total
             return foundValue
         }
