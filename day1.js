@@ -1,3 +1,5 @@
+const split = require('./util/split')
+
 const str = 
 `-2
 -3
@@ -996,15 +998,24 @@ const str =
 -9
 -81046`
 
-const numbers = str.split('\n')
+const numbers = split(str)
 
-const sum = arr => {
-    let s = 0
+let seenFrequencies = []
+let foundValue
+
+const sum = (arr, total=0) => {
     for (let i of arr) {
-        s += i[0] === '+' ? parseInt(i.slice(1)) : parseInt(i)
+        seenFrequencies.push(total)
+        total += parseInt(i)
+        if (seenFrequencies.includes(total)) {
+            console.log('here')
+            foundValue = total
+            return foundValue
+        }
     }
-    return s
+    return sum(arr, total)
 }
 
 console.log(sum(numbers))
+// console.log(seenFrequencies)
 // 599
