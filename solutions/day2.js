@@ -37,9 +37,41 @@ const getCheckSum = objects => {
     return totals.count2 * totals.count3
 }
 
-// findFrequencies('ubkfmdjxyzlbgkrotcepvswaqx')
+// p1 solution
+//const frequencies = getAllFrequencyObjects(values)
+// const checkSum = getCheckSum(frequencies)
 
-const frequencies = getAllFrequencyObjects(values)
-const checkSum = getCheckSum(frequencies)
-console.log(checkSum)
 
+const findRelatedFrequencies = strings => {
+    const length = strings.length
+    for (let outer = 0; outer < length; outer++) {
+        for (let inner = outer + 1; inner < length; inner++) {
+            let misses = 0
+            for (let char in strings[outer]) {
+                if (strings[outer][char] != strings[inner][char]) {
+                    misses ++
+                }
+            }
+            console.log(outer, inner, misses)
+            if (misses <= 1) {
+                return [strings[outer], strings[inner]]
+            }
+        }
+    }
+}
+
+const findCommon = arr => {
+    console.log(arr)
+    const str1 = arr[0]
+    const str2 = arr[1]
+    let output = ''
+    for (let char in str1) {
+        if (str1[char] === str2[char]) output += str1[char]
+    }
+    return output
+}
+
+//p2 solution
+const nearMisses = findRelatedFrequencies(values)
+const outputString = findCommon(nearMisses)
+console.log(outputString)
